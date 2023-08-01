@@ -1,0 +1,85 @@
+                            Assignment-2(SQL)
+
+1. Write an SQL query to retrieve the names and email addresses of all employees
+from a table named "Employees".
+
+select name, email from employees;
+
+2. Write an SQL query to filter records from a table named "Customers" where the
+"City" column is 'New York'.
+
+SELECT * 
+FROM customers 
+WHERE city = 'New York'
+
+3. Write an SQL query to sort records in descending order based on the "DateOfBirth"
+column in a table named "Users".
+
+select * from users
+order by dateofbirth desc;
+
+
+4. Write an SQL query to sort records in ascending order based on the
+"RegistrationDate" column in a table named "Users".
+
+select * from users
+order by registrationdate asc;
+
+
+5. Write an SQL query to find the employee with the highest salary from a table
+named "Employees" and display their name, position, and salary.
+
+select name, position, salary from employees
+where salary = (SELECT MAX(salary) FROM employees);
+
+
+6. Write an SQL query to retrieve records from a table named "Customers" where the
+"Phone" column matches the pattern '+1-XXX-XXX-XXXX'.
+
+SELECT * FROM Customers
+WHERE phone LIKE '+1-____-___-___';
+
+
+7. Write an SQL query to retrieve the top 5 customers with the highest total purchase
+amount from a table named "Orders" and display their names and total purchase
+amounts.
+
+SELECT name, SUM(PurchaseAmount) AS TotalPurchaseAmount
+FROM Orders
+GROUP BY CustomerName
+ORDER BY TotalPurchaseAmount DESC
+LIMIT 5;
+
+
+8. Write an SQL query to calculate the percentage of sales for each product category
+in a table named "Sales" and display the category name, total sales amount, and the
+percentage of total sales.
+
+SELECT 
+    CategoryName,
+    SUM(SalesAmount) AS TotalSalesAmount,
+    (SUM(SalesAmount) / (SELECT SUM(SalesAmount) FROM Sales)) * 100 AS PercentageOfTotalSales
+FROM Sales
+GROUP BY CategoryName;
+
+
+9. Write an SQL query to find the customers who have made the highest total
+purchases across all years from a table named "Orders" and display their names, email
+addresses, and the total purchase amount.
+
+select name, email, sum(purchaseamount) as totalpurchaseamount from orders
+where totalpurchaseamount = (select MAX(purchase amount) from orders);
+
+or
+
+select 
+    Name, 
+    Email,
+    SUM(PurchaseAmount) AS TotalPurchaseAmount
+FROM 
+    Orders
+GROUP BY 
+    Name, Email
+ORDER BY 
+    TotalPurchaseAmount DESC
+LIMIT 1;
